@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сувдаа чи намайг уужлахуу??? 🥺</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Creepster&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #ff6fa5;
+    --pink-dark: #e04883;
+    --pink-soft: #ffe1ec;
+    --cream: #fff7f9;
+    --ink: #4a2c3a;
+    --muted: #9b7385;
+    --night: #1d1426;
+    --night-2: #2c1d3a;
+    --pumpkin: #ff9a3c;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(circle at 20% 10%, #ffd6e7 0, transparent 40%),
+                radial-gradient(circle at 85% 90%, #ffc2d9 0, transparent 45%),
+                var(--cream);
+    min-height: 100dvh;
+    overflow: hidden;
+    transition: background 0.8s ease;
+  }
+  body.spooky {
+    background: radial-gradient(circle at 50% -10%, #4b2a5e 0, transparent 60%), var(--night);
+    color: #fbeff5;
+    overflow-y: auto;
+  }
+
+  .screen {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 18px;
+    text-align: center;
+  }
+  [hidden] { display: none !important; }
+
+  /* floating background hearts */
+  .bg-hearts span {
+    position: fixed;
+    bottom: -40px;
+    font-size: 22px;
+    opacity: 0.5;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes floatUp {
+    to { transform: translateY(-115dvh) rotate(25deg); opacity: 0; }
+  }
+
+  /* ---------- Question screen ---------- */
+  .face {
+    font-size: clamp(84px, 22vw, 130px);
+    line-height: 1;
+    animation: bob 2.2s ease-in-out infinite;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+  h1 {
+    font-size: clamp(26px, 7vw, 46px);
+    margin: 18px 0 6px;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+  }
+  .sub {
+    margin: 0 0 30px;
+    color: var(--muted);
+    font-size: clamp(16px, 4vw, 19px);
+    position: relative;
+    z-index: 1;
+    min-height: 1.4em;
+  }
+  .buttons {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+  .btn {
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 30px;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+  }
+  #yes {
+    background: var(--pink);
+    color: white;
+    box-shadow: 0 6px 0 var(--pink-dark), 0 12px 24px rgba(224, 72, 131, 0.35);
+    transition: transform 0.25s cubic-bezier(.3,1.6,.5,1);
+    position: relative;
+    z-index: 3;
+  }
+  #yes:hover { filter: brightness(1.05); }
+  #yes:active { box-shadow: 0 2px 0 var(--pink-dark); translate: 0 4px; }
+  #no {
+    background: white;
+    color: var(--muted);
+    box-shadow: 0 4px 0 #f0d2dd;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  #no.free {
+    position: fixed;
+    transition: left 0.22s ease, top 0.22s ease;
+    z-index: 50;
+  }
+
+  /* ---------- Yes screen ---------- */
+  .yay-title {
+    font-size: clamp(30px, 8vw, 52px);
+    margin: 10px 0 4px;
+    color: #ffb3d1;
+  }
+  .yay-sub { margin: 0 0 26px; color: #d9bfd0; font-size: clamp(16px, 4vw, 19px); }
+
+  .ticket {
+    width: min(100%, 440px);
+    background: linear-gradient(160deg, var(--night-2), #24162f);
+    border: 2px solid #4a3060;
+    border-radius: 22px;
+    position: relative;
+    text-align: left;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45), 0 0 40px rgba(255, 111, 165, 0.15);
+    animation: popIn 0.6s cubic-bezier(.3,1.5,.5,1) both;
+    animation-delay: 0.25s;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.6) rotate(-4deg); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+  .ticket-top { padding: 22px 24px 18px; }
+  .admit {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pumpkin);
+    border: 1.5px dashed var(--pumpkin);
+    border-radius: 8px;
+    padding: 3px 9px;
+  }
+  .movie {
+    font-family: "Creepster", "Nunito", cursive;
+    font-size: clamp(32px, 9vw, 44px);
+    color: #ff5f7e;
+    margin: 12px 0 2px;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    text-shadow: 0 0 18px rgba(255, 60, 100, 0.45);
+  }
+  .tag { color: #c7a8bd; font-size: 15px; margin: 0; }
+
+  .perf {
+    position: relative;
+    border-top: 2px dashed #4a3060;
+    margin: 0 18px;
+  }
+  .perf::before, .perf::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--night);
+    border: 2px solid #4a3060;
+  }
+  .perf::before { left: -33px; clip-path: inset(0 0 0 50%); }
+  .perf::after { right: -33px; clip-path: inset(0 50% 0 0); }
+
+  .plan {
+    margin: 0;
+    padding: 20px 24px 24px;
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .note {
+    margin-top: 24px;
+    max-width: 440px;
+    color: #e8cfe0;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  .note small { display: block; margin-top: 10px; color: #a98fa0; font-size: 14px; }
+
+  .ghost {
+    position: fixed;
+    font-size: 40px;
+    pointer-events: none;
+    animation: drift 9s ease-in-out infinite;
+    opacity: 0.85;
+    z-index: 0;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+    50% { transform: translate(18px, -22px) rotate(6deg); }
+  }
+  .yes-screen > :not(.ghost) { position: relative; z-index: 1; }
+
+  /* heart burst */
+  .burst {
+    position: fixed;
+    pointer-events: none;
+    font-size: 24px;
+    z-index: 100;
+    animation: burst 1.4s ease-out forwards;
+  }
+  @keyframes burst {
+    to { transform: translate(var(--dx), var(--dy)) rotate(var(--r)) scale(0.6); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-hearts" id="bgHearts" aria-hidden="true"></div>
+
+<!-- Screen 1: the question -->
+<main class="screen" id="ask">
+  <div class="face" id="face">🥺</div>
+  <h1>Сувдаа чи намайг уужлахуу???</h1>
+  <p class="sub" id="sub">Уучлаарай, үнэхээр уучлаарай 💗</p>
+  <div class="buttons">
+    <button class="btn" id="yes">заа уужалнаа 💖</button>
+    <button class="btn" id="no">үгүү за</button>
+  </div>
+</main>
+
+<!-- Screen 2: after she says yes -->
+<main class="screen yes-screen" id="yay" hidden>
+  <div class="face">🥰</div>
+  <h2 class="yay-title">Хөөөх!! 💞</h2>
+  <p class="yay-sub" id="yaySub"></p>
+
+  <div class="ticket">
+    <div class="ticket-top">
+      <span class="admit">🎟️ Хоёр хүний тасалбар · Болзоо</span>
+      <div class="movie" id="movie"></div>
+      <p class="tag" id="tagline"></p>
+    </div>
+    <div class="perf"></div>
+    <p class="plan" id="plan"></p>
+  </div>
+
+  <p class="note">
+    <span id="note"></span>
+    <small>📸 Энэ тасалбарыг screenshot хийгээд аваарай — буцаалтгүй шүү 😌</small>
+  </p>
+</main>
+
+<script>
+  /* =========================================================
+     ✏️  EDIT YOUR DATE DETAILS HERE
+     ========================================================= */
+  const DATE = {
+    nickname: "Сувдаа",
+    movie: "Аймшгийн кино 👻",
+    tagline: "Чи бид хоёрын болзоо 💕",
+    plan: "Хоёулаа амралтын өдрөөр цаг заваа харж байгаад киногоо үзьеэ... аймшгийн кино ииииииии 😭, гэхдээ чи даагаарай надаа мөнгө аахгүй",
+    note: "Чамайг гомдоосондоо уучлаарай. Уучилсанд чинь баярлалаа — Би чамайг бүх сүнснээс хамгаална 💕",
+  };
+  /* ========================================================= */
+
+  const $ = (id) => document.getElementById(id);
+  const yesBtn = $("yes"), noBtn = $("no"), face = $("face"), sub = $("sub");
+
+  // Floating background hearts
+  const heartChars = ["💗", "💕", "💖", "🩷", "💞"];
+  for (let i = 0; i < 14; i++) {
+    const h = document.createElement("span");
+    h.textContent = heartChars[i % heartChars.length];
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = 14 + Math.random() * 20 + "px";
+    h.style.animationDuration = 8 + Math.random() * 10 + "s";
+    h.style.animationDelay = -Math.random() * 18 + "s";
+    $("bgHearts").appendChild(h);
+  }
+
+  // ---------- The "No" button that can't be clicked ----------
+  const noTexts = [
+    "үгүү за", "Итгэлтэй байна уу?", "Үнэхээр үү?? 🥺", "Дахиад бодоорой!",
+    "Гуйя гуйяа 🙏", "ээлдээ TvT", "Ганцхан удаа уучлаач?",
+    "Барьж чадахгүй шдээ 😜", "«заа» гэчих л дээ 💕",
+  ];
+  const faces = ["🥺", "😢", "😿", "😭", "💔", "🥹", "😭"];
+  const subs = [
+    "Уучлаарай, үнэхээр уучлаарай 💗",
+    "Үгүй ээ, битгий тэгээч 😢",
+    "Зүрх минь өвдөөд байна 💔",
+    "Нөгөө товч нь тэнд байна шдээ 👉",
+    "Юу ч хийхэд бэлэн шүү!!",
+    "za uujilchihaa hairtaa 😤",
+  ];
+
+  let tries = 0;
+  let lastDodge = 0;
+  let pointer = { x: -999, y: -999 };
+
+  document.addEventListener("pointermove", (e) => { pointer = { x: e.clientX, y: e.clientY }; });
+
+  function freeNoButton() {
+    if (noBtn.classList.contains("free")) return;
+    const r = noBtn.getBoundingClientRect();
+    document.body.appendChild(noBtn);  // escape any transformed parent
+    noBtn.classList.add("free");
+    noBtn.style.left = r.left + "px";
+    noBtn.style.top = r.top + "px";
+    noBtn.offsetWidth; // reflow so the first move animates
+  }
+
+  function overlaps(x, y, w, h, rect, margin) {
+    return x < rect.right + margin && x + w > rect.left - margin &&
+           y < rect.bottom + margin && y + h > rect.top - margin;
+  }
+
+  function dodge(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    const now = Date.now();
+    if (now - lastDodge < 120) return;
+    lastDodge = now;
+
+    if (e && e.touches && e.touches[0]) {
+      pointer = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+
+    tries++;
+    noBtn.textContent = noTexts[Math.min(tries, noTexts.length - 1)];
+    face.textContent = faces[Math.min(tries, faces.length - 1)];
+    sub.textContent = subs[Math.min(tries, subs.length - 1)];
+    const maxScale = window.innerWidth < 500 ? 1.5 : 2;
+    yesBtn.style.transform = `scale(${Math.min(1 + tries * 0.12, maxScale)})`;
+
+    freeNoButton();
+
+    const pad = 14;
+    const w = noBtn.offsetWidth, h = noBtn.offsetHeight;
+    const maxX = Math.max(pad, window.innerWidth - w - pad);
+    const maxY = Math.max(pad, window.innerHeight - h - pad);
+    const yesRect = yesBtn.getBoundingClientRect();
+    const cur = noBtn.getBoundingClientRect();
+
+    let x, y, attempt = 0;
+    do {
+      x = pad + Math.random() * (maxX - pad);
+      y = pad + Math.random() * (maxY - pad);
+      attempt++;
+      const farFromFinger = Math.hypot(x + w / 2 - pointer.x, y + h / 2 - pointer.y) > 140;
+      const farFromOld = Math.hypot(x - cur.left, y - cur.top) > 100;
+      if (!overlaps(x, y, w, h, yesRect, 20) && farFromFinger && farFromOld) break;
+    } while (attempt < 60);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  noBtn.addEventListener("mouseenter", dodge);                     // laptop: runs away on hover
+  noBtn.addEventListener("touchstart", dodge, { passive: false }); // phone: runs away on tap
+  noBtn.addEventListener("click", dodge);                          // keyboard / anything else
+
+  window.addEventListener("resize", () => {
+    if (!noBtn.classList.contains("free")) return;
+    const w = noBtn.offsetWidth, h = noBtn.offsetHeight;
+    noBtn.style.left = Math.min(parseFloat(noBtn.style.left), window.innerWidth - w - 14) + "px";
+    noBtn.style.top = Math.min(parseFloat(noBtn.style.top), window.innerHeight - h - 14) + "px";
+  });
+
+  // ---------- Yes! ----------
+  function heartBurst(cx, cy, count) {
+    const chars = ["💖", "💕", "💗", "🩷", "✨", "👻", "🎃"];
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement("span");
+      s.className = "burst";
+      s.textContent = chars[Math.floor(Math.random() * chars.length)];
+      s.style.left = cx + "px";
+      s.style.top = cy + "px";
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 120 + Math.random() * 260;
+      s.style.setProperty("--dx", Math.cos(angle) * dist + "px");
+      s.style.setProperty("--dy", Math.sin(angle) * dist + "px");
+      s.style.setProperty("--r", (Math.random() * 360 - 180) + "deg");
+      s.style.fontSize = 18 + Math.random() * 22 + "px";
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1500);
+    }
+  }
+
+  yesBtn.addEventListener("click", () => {
+    const r = yesBtn.getBoundingClientRect();
+    heartBurst(r.left + r.width / 2, r.top + r.height / 2, 40);
+
+    setTimeout(() => {
+      noBtn.remove();
+      $("ask").hidden = true;
+      $("bgHearts").hidden = true;
+      document.body.classList.add("spooky");
+
+      $("yaySub").textContent = `Баярлалаа ${DATE.nickname}!! Тэгээд... би энэ амралтын өдөр нэг юм төлөвлөчихсөн 👀`;
+      $("movie").textContent = DATE.movie;
+      $("tagline").textContent = DATE.tagline;
+      $("plan").textContent = DATE.plan;
+      $("note").textContent = DATE.note;
+
+      // little floating ghosts & pumpkins
+      [["👻", "8%", "12%"], ["🎃", "86%", "18%"], ["🦇", "12%", "78%"], ["👻", "84%", "72%"]]
+        .forEach(([c, l, t], i) => {
+          const g = document.createElement("div");
+          g.className = "ghost";
+          g.textContent = c;
+          g.style.left = l;
+          g.style.top = t;
+          g.style.animationDelay = -i * 2 + "s";
+          $("yay").appendChild(g);
+        });
+
+      $("yay").hidden = false;
+      window.scrollTo(0, 0);
+      setTimeout(() => heartBurst(window.innerWidth / 2, window.innerHeight / 3, 30), 300);
+    }, 450);
+  });
+</script>
+</body>
+</html>
